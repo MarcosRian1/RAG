@@ -4,9 +4,8 @@ langchain
 langchain-community
 chromadb
 langchain-chroma
-langchain-ollama
+langchain_google_genai
 pypdf
 python-multipart
-ollama
 streamlit
 google-genai
