@@ -9,9 +9,11 @@ import time
 DATA_PATH = 'data/docs'
 CHROMA_PATH = 'chroma'
 
+# Função para ingestão dos arquivos
 def load_documents():
     documents = []
 
+    # Iterando sobre cada arquivo na pasta especificada
     for file in os.listdir(DATA_PATH):
         path = os.path.join(DATA_PATH, file)
 
@@ -24,6 +26,7 @@ def load_documents():
 
     return documents
 
+# Função para realizar os chunks nos documentos
 def split_documents(documents):
     splitter = RecursiveCharacterTextSplitter(
         chunk_size = 800,
@@ -32,6 +35,7 @@ def split_documents(documents):
 
     return splitter.split_documents(documents)
 
+# Função de ingestão dos dados, onde são carregados e aplicado o embedding para armazenar no Chroma
 def ingest():
     documents = load_documents()
     chunks = split_documents(documents)
@@ -51,6 +55,7 @@ def ingest():
 
     total = len(chunks)
 
+    # Loop para realizar os chunks e armazenar de forma fatiada
     for inicio in range(0, total, batch_size):
         lote = chunks[inicio:inicio + batch_size]
 

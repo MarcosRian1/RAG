@@ -9,19 +9,25 @@ api_key = get_secret('API_KEY')
 # Instanciando o SDK
 client = genai.Client(api_key=api_key)
 
+# Função da pergunta do usuário
 def ask_rag(question: str, chat_history: list):
+
+    # Modelo para transformação dos embeddings
     embeddings = GoogleGenerativeAIEmbeddings(
         model='gemini-embedding-001',
         google_api_key = get_secret('API_KEY')
     )
 
+    # Database Chroma para armazenamento
     db = Chroma(
         persist_directory = 'chroma',
         embedding_function=embeddings
     )
 
+    # Busca por similaridade igual a 3
     docs = db.similarity_search(question, k=3)
 
+    # Recuperação do contexto nos documentos
     context = '\n\n'.join([doc.page_content for doc in docs])
 
     system_prompt = f'''
@@ -43,12 +49,14 @@ def ask_rag(question: str, chat_history: list):
         - Valores monetários devem utilizar o formato brasileiro: R$ 1.000,00.
         - Não confunda valores monetários com expressões matemáticas.
     '''
+
     # Converte o histórico em texto
     history_text = "\n".join(
         f"{role}: {message}"
         for role, message in chat_history[-10:]
     )
 
+    # Definição do prompt com historico da conversa, contexto e a pergunta do usuário
     prompt = f'''
     Histórico da conversa:
     {history_text}
