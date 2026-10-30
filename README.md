@@ -53,7 +53,7 @@ O funcionamento da aplicação segue as seguintes etapas:
 | Arquivo | Responsabilidade |
 |---|---|
 | `chat.py` | Interface Streamlit e gerenciamento do histórico |
-| `app.py` | API FastAPI e rota de recebimento das perguntas |
+| `main.py` | API FastAPI e rota de recebimento das perguntas |
 | `rag.py` | Recuperação de informações dos documentos e geração de respostas |
 
 ## 💻 Como executar localmente
@@ -91,7 +91,7 @@ python app/ingest.py
 **6. Inicie a API FastAPI**
 
 ```bash
-uvicorn app.app:app --reload
+uvicorn app.main:app --reload
 ```
 
 A API estará disponível em:
@@ -107,7 +107,7 @@ A documentação interativa poderá ser acessada em:
 Em outro terminal, execute:
 
 ```bash
-python -m streamlit run chat.py
+python -m streamlit run app/chat.py
 ```
 
 A interface estará disponível em:
