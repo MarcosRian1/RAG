@@ -47,6 +47,9 @@ O funcionamento da aplicação segue as seguintes etapas:
 - **Streamlit:** construção da interface de conversação.
 - **Pydantic:** validação dos dados recebidos pela API.
 - **Requests:** comunicação HTTP entre Streamlit e FastAPI.
+- **ChromaDB**: banco vetorial utilizado para armazenar os embeddings e realizar a recuperação.
+- **LangChain**: utilizado no carregamento, fragmentação e integração dos documentos com o Chroma.
+- **Google Generative AI Embeddings**: geração das representações vetoriais dos documentos e perguntas.
 
 ## 📂 Organização do projeto
 
